@@ -1,0 +1,492 @@
+[
+  {
+    "projectName": "Immunotherapy Advances",
+    "researchField": "Oncology",
+    "leadInstitution": "Johns Hopkins University",
+    "startDate": "2022-03-01",
+    "endDate": "2025-12-31",
+    "funding": {
+      "totalAmount": 5000000,
+      "sources": [
+        {
+          "name": "National Cancer Institute",
+          "amount": 3000000
+        },
+        {
+          "name": "Pharmaceutical Company X",
+          "amount": 2000000
+        },
+        {
+          "name": "American Cancer Society",
+          "amount": 1000000
+        }
+      ]
+    },
+    "researchTeam": [
+      {
+        "name": "Dr. Jane Smith",
+        "role": "Principal Investigator",
+        "specialty": "Immunotherapy"
+      },
+      {
+        "name": "Dr. John Doe",
+        "role": "Co-Investigator",
+        "specialty": "Molecular Biology"
+      },
+      {
+        "name": "Dr. Emily Davis",
+        "role": "Data Scientist",
+        "specialty": "Biostatistics"
+      }
+    ],
+    "milestones": [
+      {
+        "name": "Phase 1 Clinical Trials",
+        "completionDate": "2023-06-30",
+        "status": "Completed"
+      },
+      {
+        "name": "Phase 2 Clinical Trials",
+        "completionDate": "2024-12-31",
+        "status": "Ongoing"
+      },
+      {
+        "name": "Final Report Submission",
+        "completionDate": "2025-12-31",
+        "status": "Pending"
+      }
+    ],
+    "publications": [
+      {
+        "title": "Efficacy of New Immunotherapy in Early-Stage Oncology",
+        "journal": "Journal of Clinical Oncology",
+        "publicationDate": "2023-09-15",
+        "doi": "10.1200/JCO.22.00467"
+      },
+      {
+        "title": "Advances in Molecular Biology for Cancer Treatment",
+        "journal": "Nature Medicine",
+        "publicationDate": "2024-04-10",
+        "doi": "10.1038/s41591-024-00045-6"
+      }
+    ],
+    "clinicalTrials": [
+      {
+        "trialName": "Immunotherapy Trial A",
+        "phase": "Phase 1",
+        "startDate": "2023-01-01",
+        "endDate": "2023-06-30",
+        "totalParticipants": 150,
+        "status": "Completed"
+      },
+      {
+        "trialName": "Immunotherapy Trial B",
+        "phase": "Phase 2",
+        "startDate": "2024-01-01",
+        "endDate": "2024-12-31",
+        "totalParticipants": 250,
+        "status": "Ongoing"
+      },
+      {
+        "trialName": "Immunotherapy Trial C",
+        "phase": "Phase 3",
+        "startDate": "2025-01-01",
+        "endDate": "2025-12-31",
+        "totalParticipants": 400,
+        "status": "Pending"
+      }
+    ]
+  },
+  {
+    "projectName": "Neurodegenerative Disease Prevention",
+    "researchField": "Neurology",
+    "leadInstitution": "Harvard Medical School",
+    "startDate": "2021-05-15",
+    "endDate": "2024-11-30",
+    "funding": {
+      "totalAmount": 7500000,
+      "sources": [
+        {
+          "name": "National Institutes of Health",
+          "amount": 5000000
+        },
+        {
+          "name": "Alzheimer's Association",
+          "amount": 1500000
+        },
+        {
+          "name": "Michael J. Fox Foundation",
+          "amount": 1000000
+        }
+      ]
+    },
+    "researchTeam": [
+      {
+        "name": "Dr. Alice Green",
+        "role": "Principal Investigator",
+        "specialty": "Neurology"
+      },
+      {
+        "name": "Dr. Robert Lee",
+        "role": "Co-Investigator",
+        "specialty": "Neuroscience"
+      },
+      {
+        "name": "Dr. Lisa Wong",
+        "role": "Data Scientist",
+        "specialty": "Bioinformatics"
+      }
+    ],
+    "milestones": [
+      {
+        "name": "Initial Biomarker Discovery",
+        "completionDate": "2022-12-31",
+        "status": "Completed"
+      },
+      {
+        "name": "Phase 1 Clinical Trials",
+        "completionDate": "2023-09-30",
+        "status": "Completed"
+      },
+      {
+        "name": "Final Analysis and Reporting",
+        "completionDate": "2024-11-30",
+        "status": "Pending"
+      }
+    ],
+    "publications": [
+      {
+        "title": "Biomarkers for Early Detection of Alzheimer’s Disease",
+        "journal": "Alzheimer's & Dementia",
+        "publicationDate": "2023-02-20",
+        "doi": "10.1016/j.jalz.2023.01.002"
+      },
+      {
+        "title": "Advances in Neurodegenerative Disease Prevention",
+        "journal": "Lancet Neurology",
+        "publicationDate": "2024-07-15",
+        "doi": "10.1016/S1474-4422(24)00234-9"
+      }
+    ],
+    "clinicalTrials": [
+      {
+        "trialName": "Neuroprotective Agent Trial 1",
+        "phase": "Phase 1",
+        "startDate": "2022-06-01",
+        "endDate": "2023-09-30",
+        "totalParticipants": 200,
+        "status": "Completed"
+      },
+      {
+        "trialName": "Neuroprotective Agent Trial 2",
+        "phase": "Phase 2",
+        "startDate": "2023-12-01",
+        "endDate": "2024-11-30",
+        "totalParticipants": 350,
+        "status": "Ongoing"
+      },
+      {
+        "trialName": "Neuroprotective Agent Trial 3",
+        "phase": "Phase 3",
+        "startDate": "2024-12-01",
+        "endDate": "2025-11-30",
+        "totalParticipants": 500,
+        "status": "Pending"
+      }
+    ]
+  },
+  {
+    "projectName": "Diabetes Management Innovations",
+    "researchField": "Endocrinology",
+    "leadInstitution": "University of Cambridge",
+    "startDate": "2020-01-01",
+    "endDate": "2023-12-31",
+    "funding": {
+      "totalAmount": 4500000,
+      "sources": [
+        {
+          "name": "Wellcome Trust",
+          "amount": 2000000
+        },
+        {
+          "name": "Juvenile Diabetes Research Foundation",
+          "amount": 1500000
+        },
+        {
+          "name": "European Research Council",
+          "amount": 1000000
+        }
+      ]
+    },
+    "researchTeam": [
+      {
+        "name": "Dr. Michael Brown",
+        "role": "Principal Investigator",
+        "specialty": "Endocrinology"
+      },
+      {
+        "name": "Dr. Susan White",
+        "role": "Co-Investigator",
+        "specialty": "Diabetes Research"
+      },
+      {
+        "name": "Dr. David Black",
+        "role": "Data Scientist",
+        "specialty": "Biostatistics"
+      }
+    ],
+    "milestones": [
+      {
+        "name": "Development of New Insulin Formulation",
+        "completionDate": "2021-06-30",
+        "status": "Completed"
+      },
+      {
+        "name": "Phase 1 Clinical Trials",
+        "completionDate": "2022-08-31",
+        "status": "Completed"
+      },
+      {
+        "name": "Market Readiness Assessment",
+        "completionDate": "2023-12-31",
+        "status": "Pending"
+      }
+    ],
+    "publications": [
+      {
+        "title": "Innovations in Diabetes Management",
+        "journal": "Diabetes Care",
+        "publicationDate": "2022-11-10",
+        "doi": "10.2337/dc22-0934"
+      },
+      {
+        "title": "Advances in Insulin Delivery Methods",
+        "journal": "Nature Reviews Endocrinology",
+        "publicationDate": "2023-04-18",
+        "doi": "10.1038/s41574-023-00578-1"
+      }
+    ],
+    "clinicalTrials": [
+      {
+        "trialName": "Insulin Formulation Trial 1",
+        "phase": "Phase 1",
+        "startDate": "2021-07-01",
+        "endDate": "2022-08-31",
+        "totalParticipants": 100,
+        "status": "Completed"
+      },
+      {
+        "trialName": "Insulin Formulation Trial 2",
+        "phase": "Phase 2",
+        "startDate": "2022-09-01",
+        "endDate": "2023-12-31",
+        "totalParticipants": 250,
+        "status": "Ongoing"
+      },
+      {
+        "trialName": "Insulin Formulation Trial 3",
+        "phase": "Phase 3",
+        "startDate": "2024-01-01",
+        "endDate": "2024-12-31",
+        "totalParticipants": 400,
+        "status": "Pending"
+      }
+    ]
+  },
+  {
+    "projectName": "Advanced Vaccines for Emerging Viruses",
+    "researchField": "Virology",
+    "leadInstitution": "University of Oxford",
+    "startDate": "2022-01-01",
+    "endDate": "2025-12-31",
+    "funding": {
+      "totalAmount": 10000000,
+      "sources": [
+        {
+          "name": "Gates Foundation",
+          "amount": 5000000
+        },
+        {
+          "name": "World Health Organization",
+          "amount": 3000000
+        },
+        {
+          "name": "UK Government",
+          "amount": 2000000
+        }
+      ]
+    },
+    "researchTeam": [
+      {
+        "name": "Dr. Thomas Grey",
+        "role": "Principal Investigator",
+        "specialty": "Virology"
+      },
+      {
+        "name": "Dr. Amanda Blue",
+        "role": "Co-Investigator",
+        "specialty": "Immunology"
+      },
+      {
+        "name": "Dr. Christopher Red",
+        "role": "Data Scientist",
+        "specialty": "Bioinformatics"
+      }
+    ],
+    "milestones": [
+      {
+        "name": "Vaccine Candidate Development",
+        "completionDate": "2023-03-31",
+        "status": "Completed"
+      },
+      {
+        "name": "Phase 1 Clinical Trials",
+        "completionDate": "2023-12-31",
+        "status": "Ongoing"
+      },
+      {
+        "name": "Phase 2 Clinical Trials",
+        "completionDate": "2025-12-31",
+        "status": "Pending"
+      }
+    ],
+    "publications": [
+      {
+        "title": "Efficacy of New Vaccines Against Emerging Viruses",
+        "journal": "Vaccine",
+        "publicationDate": "2023-07-20",
+        "doi": "10.1016/j.vaccine.2023.07.034"
+      },
+      {
+        "title": "Innovations in Vaccine Delivery Systems",
+        "journal": "Lancet Infectious Diseases",
+        "publicationDate": "2024-02-11",
+        "doi": "10.1016/S1473-3099(24)00345-7"
+      }
+    ],
+    "clinicalTrials": [
+      {
+        "trialName": "Vaccine Candidate Trial 1",
+        "phase": "Phase 1",
+        "startDate": "2023-04-01",
+        "endDate": "2023-12-31",
+        "totalParticipants": 300,
+        "status": "Ongoing"
+      },
+      {
+        "trialName": "Vaccine Candidate Trial 2",
+        "phase": "Phase 2",
+        "startDate": "2024-01-01",
+        "endDate": "2025-12-31",
+        "totalParticipants": 500,
+        "status": "Pending"
+      },
+      {
+        "trialName": "Vaccine Candidate Trial 3",
+        "phase": "Phase 3",
+        "startDate": "2026-01-01",
+        "endDate": "2027-12-31",
+        "totalParticipants": 1000,
+        "status": "Pending"
+      }
+    ]
+  },
+  {
+    "projectName": "Regenerative Medicine for Spinal Cord Injuries",
+    "researchField": "Regenerative Medicine",
+    "leadInstitution": "Stanford University",
+    "startDate": "2023-04-01",
+    "endDate": "2026-06-30",
+    "funding": {
+      "totalAmount": 8000000,
+      "sources": [
+        {
+          "name": "California Institute for Regenerative Medicine",
+          "amount": 5000000
+        },
+        {
+          "name": "Christopher & Dana Reeve Foundation",
+          "amount": 2000000
+        },
+        {
+          "name": "Private Donors",
+          "amount": 1000000
+        }
+      ]
+    },
+    "researchTeam": [
+      {
+        "name": "Dr. James White",
+        "role": "Principal Investigator",
+        "specialty": "Regenerative Medicine"
+      },
+      {
+        "name": "Dr. Clara Black",
+        "role": "Co-Investigator",
+        "specialty": "Neurosurgery"
+      },
+      {
+        "name": "Dr. Mark Green",
+        "role": "Data Scientist",
+        "specialty": "Biostatistics"
+      }
+    ],
+    "milestones": [
+      {
+        "name": "Stem Cell Therapy Development",
+        "completionDate": "2024-09-30",
+        "status": "Ongoing"
+      },
+      {
+        "name": "Phase 1 Clinical Trials",
+        "completionDate": "2025-06-30",
+        "status": "Pending"
+      },
+      {
+        "name": "Phase 2 Clinical Trials",
+        "completionDate": "2026-06-30",
+        "status": "Pending"
+      }
+    ],
+    "publications": [
+      {
+        "title": "Stem Cell Therapy for Spinal Cord Injury",
+        "journal": "Nature Medicine",
+        "publicationDate": "2024-12-01",
+        "doi": "10.1038/s41591-024-00089-6"
+      },
+      {
+        "title": "Regenerative Approaches to Spinal Cord Repair",
+        "journal": "Lancet Neurology",
+        "publicationDate": "2025-08-25",
+        "doi": "10.1016/S1474-4422(25)00123-4"
+      }
+    ],
+    "clinicalTrials": [
+      {
+        "trialName": "Stem Cell Therapy Trial 1",
+        "phase": "Phase 1",
+        "startDate": "2024-10-01",
+        "endDate": "2025-06-30",
+        "totalParticipants": 100,
+        "status": "Pending"
+      },
+      {
+        "trialName": "Stem Cell Therapy Trial 2",
+        "phase": "Phase 2",
+        "startDate": "2025-07-01",
+        "endDate": "2026-06-30",
+        "totalParticipants": 250,
+        "status": "Pending"
+      },
+      {
+        "trialName": "Stem Cell Therapy Trial 3",
+        "phase": "Phase 3",
+        "startDate": "2026-07-01",
+        "endDate": "2027-06-30",
+        "totalParticipants": 500,
+        "status": "Pending"
+      }
+    ]
+  }
+]
