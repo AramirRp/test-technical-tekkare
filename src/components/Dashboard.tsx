@@ -3,17 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../store/store';
 import { setMedicationData, setResearchData } from '../store/dataSlice';
 import { useTranslation } from 'react-i18next';
-import { Box, Paper, Typography, useMediaQuery, useTheme, Button } from '@mui/material';
+import { Box, Paper, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, BarChart, Bar, PieChart, Pie, Cell } from 'recharts';
 
 const Dashboard: React.FC = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-
-  const toggleLanguage = () => {
-    i18n.changeLanguage(i18n.language === 'en' ? 'fr' : 'en');
-  };
 
   const dispatch = useDispatch();
   const { medicationData, researchData } = useSelector((state: RootState) => state.data);
@@ -41,10 +37,7 @@ const Dashboard: React.FC = () => {
   const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884D8'];
 
   return (
-    <Box sx={{ p: 2 }}>
-      <Button onClick={toggleLanguage} sx={{ mb: 2 }}>
-        {t('switchLanguage')}
-      </Button>
+    <Box sx={{ p: 3 }}>
       <Box display="grid" gridTemplateColumns={isMobile ? '1fr' : 'repeat(12, 1fr)'} gap={2}>
         <Box gridColumn={isMobile ? 'span 1' : 'span 6'}>
           <Paper sx={{ p: 2, height: '100%' }}>

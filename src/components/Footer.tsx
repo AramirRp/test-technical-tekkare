@@ -1,13 +1,13 @@
 import React from 'react';
-import { Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-gray-200 p-4">
-      <Typography variant="body2" align="center">
+    <Box component="footer" sx={{ bgcolor: 'background.paper', py: 2, mt: 'auto' }}>
+      <Typography variant="body2" color="text.secondary" align="center">
         © 2024 Your Company. All rights reserved.
       </Typography>
-    </footer>
+    </Box>
   );
 };
 
