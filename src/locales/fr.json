@@ -1,5 +1,10 @@
 {
-"fr": {
+  "fr": {
+    "welcome": {
+      "title": "Bienvenue sur le Tableau de Bord de Recherche",
+      "description": "Explorez les données sur les prix des médicaments, le financement de la recherche et les essais cliniques.",
+      "enterDashboard": "Accéder au Tableau de Bord"
+    },
     "dashboard": {
       "title": "Tableau de bord",
       "medicationChart": "Historique des prix des médicaments",
@@ -17,6 +22,6 @@
     "ongoing": "En cours",
     "pending": "En attente",
     "participants": "Participants",
-    "conditions":"coucou"
+    "conditions": "coucou"
   }
 }

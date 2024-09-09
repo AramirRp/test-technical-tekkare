@@ -1,5 +1,3 @@
-// src/components/pages/Dashboard.tsx
-
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { CircularProgress, Typography, Box } from '@mui/material';
@@ -7,6 +5,29 @@ import DashboardTemplate from '../template/DashboardTemplate';
 import MedicationPriceChart, { MedicationData } from '../organisms/MedicationPriceChart';
 import ResearchFundingChart from '../organisms/ResearchFundingChart';
 import ClinicalTrialsChart from '../organisms/ClinicalTrialsChart';
+import FloatingLanguageSwitch from '../molecules/FloatingLanguageSwitch';
+
+interface PriceHistory {
+  date: string;
+  priceEUR: number;
+  priceUSD: number;
+}
+
+interface Medication {
+  name: string;
+  dosage: string;
+  priceHistory: PriceHistory[];
+}
+
+interface Molecule {
+  name: string;
+  description: string;
+  medications: Medication[];
+}
+
+interface MedicationData {
+  molecules: Molecule[];
+}
 
 interface ClinicalTrial {
   trialName: string;
@@ -20,6 +41,9 @@ interface ClinicalTrial {
 interface ResearchProject {
   projectName: string;
   researchField: string;
+  leadInstitution: string;
+  startDate: string;
+  endDate: string;
   funding: {
     totalAmount: number;
     sources: Array<{
@@ -27,6 +51,22 @@ interface ResearchProject {
       amount: number;
     }>;
   };
+  researchTeam: Array<{
+    name: string;
+    role: string;
+    specialty: string;
+  }>;
+  milestones: Array<{
+    name: string;
+    completionDate: string;
+    status: string;
+  }>;
+  publications: Array<{
+    title: string;
+    journal: string;
+    publicationDate: string;
+    doi: string;
+  }>;
   clinicalTrials: ClinicalTrial[];
 }
 
@@ -70,11 +110,14 @@ export const Dashboard: React.FC = () => {
   }
 
   return (
-    <DashboardTemplate>
-      <MedicationPriceChart data={medicationData} />
-      <ResearchFundingChart data={researchData} />
-      <ClinicalTrialsChart data={researchData} />
-    </DashboardTemplate>
+    <>
+      <DashboardTemplate>
+        <MedicationPriceChart data={medicationData} />
+        <ResearchFundingChart data={researchData} />
+        <ClinicalTrialsChart data={researchData} />
+      </DashboardTemplate>
+      <FloatingLanguageSwitch />
+    </>
   );
 };
 

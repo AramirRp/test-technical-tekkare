@@ -1,22 +1,28 @@
 {
-"en": {
-  "dashboard": {
-    "title": "Dashboard",
-    "medicationChart": "Medication Price History",
-    "researchFundingChart": "Research Funding Distribution",
-    "clinicalTrialsChart": "Clinical Trial Participants"
-  },
-  "languageSwitch": "Switch to French",
-  "loading": "Loading...",
-  "allMolecules": "All Molecules",
-  "priceEUR": "Price (EUR)",
-  "priceUSD": "Price (USD)",
-  "allFields": "All Fields",
-  "allStatuses": "All Statuses",
-  "completed": "Completed",
-  "ongoing": "Ongoing",
-  "pending": "Pending",
-  "participants": "Participants",
-  "conditions":"coucou"
-}
+  "en": {
+    "dashboard": {
+      "title": "Dashboard",
+      "medicationChart": "Medication Price History",
+      "researchFundingChart": "Research Funding Distribution",
+      "clinicalTrialsChart": "Clinical Trial Participants"
+    },
+
+    "welcome": {
+      "title": "Welcome to the Research Dashboard",
+      "description": "Explore medication prices, research funding, and clinical trials data.",
+      "enterDashboard": "Enter Dashboard"
+    },
+    "languageSwitch": "Switch to French",
+    "loading": "Loading...",
+    "allMolecules": "All Molecules",
+    "priceEUR": "Price (EUR)",
+    "priceUSD": "Price (USD)",
+    "allFields": "All Fields",
+    "allStatuses": "All Statuses",
+    "completed": "Completed",
+    "ongoing": "Ongoing",
+    "pending": "Pending",
+    "participants": "Participants",
+    "conditions": "coucou"
+  }
 }
