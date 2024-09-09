@@ -1,26 +1,12 @@
+// src/components/pages/Dashboard.tsx
+
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { CircularProgress, Typography, Box } from '@mui/material';
 import DashboardTemplate from '../template/DashboardTemplate';
-import MedicationPriceChart from '../organisms/MedicationPriceChart';
+import MedicationPriceChart, { MedicationData } from '../organisms/MedicationPriceChart';
 import ResearchFundingChart from '../organisms/ResearchFundingChart';
 import ClinicalTrialsChart from '../organisms/ClinicalTrialsChart';
-
-interface MedicationData {
-  molecules: Array<{
-    name: string;
-    description: string;
-    medications: Array<{
-      name: string;
-      dosage: string;
-      priceHistory: Array<{
-        date: string;
-        priceEUR: number;
-        priceUSD: number;
-      }>;
-    }>;
-  }>;
-}
 
 interface ClinicalTrial {
   trialName: string;
@@ -85,9 +71,9 @@ export const Dashboard: React.FC = () => {
 
   return (
     <DashboardTemplate>
-      {medicationData && <MedicationPriceChart data={medicationData} />}
-      {researchData && <ResearchFundingChart data={researchData} />}
-      {researchData && <ClinicalTrialsChart data={researchData} />}
+      <MedicationPriceChart data={medicationData} />
+      <ResearchFundingChart data={researchData} />
+      <ClinicalTrialsChart data={researchData} />
     </DashboardTemplate>
   );
 };
