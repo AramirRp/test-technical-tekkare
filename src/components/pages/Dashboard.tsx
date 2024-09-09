@@ -76,12 +76,4 @@ export const Dashboard: React.FC = () => {
       </Box>
     );
   }
-
-  return (
-    <DashboardTemplate
-      medicationChart={<MedicationPriceChart medicationData={medicationData} />}
-      researchFundingChart={<ResearchFundingChart researchData={researchData} />}
-      clinicalTrialsChart={<ClinicalTrialsChart researchData={researchData} />}
-    />
-  );
 };

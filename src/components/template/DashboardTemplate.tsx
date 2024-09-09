@@ -1,20 +1,17 @@
 import React, { Suspense, useEffect, useState } from 'react';
 import { Box, Typography, CircularProgress } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import ErrorBoundary from '../ErrorBoundary';
 
 const MedicationPriceChart = React.lazy(() => import('../organisms/MedicationPriceChart'));
 const ResearchFundingChart = React.lazy(() => import('../organisms/ResearchFundingChart'));
 const ClinicalTrialsChart = React.lazy(() => import('../organisms/ClinicalTrialsChart'));
 
 const ChartWrapper = React.memo(({ children, label }: { children: React.ReactNode; label: string }) => (
-  <ErrorBoundary>
     <Suspense fallback={<CircularProgress />}>
       <Box aria-label={label}>
         {children}
       </Box>
     </Suspense>
-  </ErrorBoundary>
 ));
 
 export const DashboardTemplate: React.FC = () => {
