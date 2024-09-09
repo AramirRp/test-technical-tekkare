@@ -78,4 +78,18 @@ export const Dashboard: React.FC = () => {
     return (
       <Box display="flex" justifyContent="center" alignItems="center" height="100vh">
         <CircularProgress />
-        <Typography ml
+        <Typography ml={2}>{t('loading')}</Typography>
+      </Box>
+    );
+  }
+
+  return (
+    <DashboardTemplate>
+      <MedicationPriceChart data={medicationData} />
+      <ResearchFundingChart data={researchData} />
+      <ClinicalTrialsChart data={researchData} />
+    </DashboardTemplate>
+  );
+};
+
+export default Dashboard;
