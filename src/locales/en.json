@@ -1,10 +1,16 @@
 {
-    "switchLanguage": "Switch to French",
-    "medicationPriceTrends": "Medication Price Trends",
-    "researchFundingDistribution": "Research Funding Distribution",
-    "clinicalTrialParticipants": "Clinical Trial Participants",
-    "priceEUR": "Price (EUR)",
-    "priceUSD": "Price (USD)",
-    "participants": "Participants"
-  }
-  
+  "dashboard": {
+    "title": "Dashboard",
+    "medicationChart": "Medication Price History",
+    "researchFundingChart": "Research Funding Distribution",
+    "clinicalTrialsChart": "Clinical Trial Participants"
+  },
+  "languageSwitch": "Switch to French",
+  "loading": "Loading...",
+  "allMolecules": "All Molecules",
+  "priceEUR": "Price (EUR)",
+  "priceUSD": "Price (USD)",
+  "allFields": "All Fields",
+  "allStatuses": "All Statuses",
+  "condition":"test"
+}

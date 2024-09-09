@@ -1,22 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { loadLocales } from '../i18n';
+import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
-interface TranslationLoaderProps {
-  children: React.ReactNode;
-}
-
-const TranslationLoader: React.FC<TranslationLoaderProps> = ({ children }) => {
-  const [isLoaded, setIsLoaded] = useState(false);
+const TranslationLoader: React.FC = () => {
+  const { i18n } = useTranslation();
 
   useEffect(() => {
-    loadLocales().then(() => setIsLoaded(true));
-  }, []);
+  }, [i18n.language]);
 
-  if (!isLoaded) {
-    return <div>Loading translations...</div>;
-  }
-
-  return <>{children}</>;
+  return null;
 };
 
 export default TranslationLoader;

@@ -1,9 +1,10 @@
 import React from 'react';
 import { Box, CssBaseline, ThemeProvider, createTheme } from '@mui/material';
-import Header from '../components/Header';
-import Sidebar from '../components/Sidebar';
-import Dashboard from '../components/Dashboard';
-import Footer from '../components/Footer';
+import Header from '../atoms/Header';
+import { DashboardTemplate } from '../template/DashboardTemplate';
+import Footer from '../atoms/Footer';
+import FloatingLanguageSwitch from '../atoms/FloatingLanguageSwitch'
+
 
 const theme = createTheme({
   // Customize your theme here
@@ -16,12 +17,12 @@ const LandingPage: React.FC = () => {
       <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
         <Header />
         <Box sx={{ display: 'flex', flex: 1 }}>
-          <Sidebar />
           <Box component="main" sx={{ flexGrow: 1, p: 3, width: '100%' }}>
-            <Dashboard />
+            <DashboardTemplate />
           </Box>
         </Box>
         <Footer />
+        <FloatingLanguageSwitch />
       </Box>
     </ThemeProvider>
   );
