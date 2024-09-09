@@ -1,4 +1,5 @@
 {
+"en": {
   "dashboard": {
     "title": "Dashboard",
     "medicationChart": "Medication Price History",
@@ -12,5 +13,10 @@
   "priceUSD": "Price (USD)",
   "allFields": "All Fields",
   "allStatuses": "All Statuses",
-  "condition":"test"
+  "completed": "Completed",
+  "ongoing": "Ongoing",
+  "pending": "Pending",
+  "participants": "Participants",
+  "conditions":"coucou"
+}
 }

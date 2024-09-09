@@ -1,55 +1,69 @@
-import React, { ErrorInfo, ReactNode } from 'react';
-import { Box, Typography } from '@mui/material';
+import React, { Suspense, useEffect, useState } from 'react';
+import { Box, Typography, CircularProgress } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import MedicationPriceChart from '../organisms/MedicationPriceChart';
-import ResearchFundingChart from '../organisms/ResearchFundingChart';
-import ClinicalTrialsChart from '../organisms/ClinicalTrialsChart';
+import ErrorBoundary from '../ErrorBoundary';
 
-class ErrorBoundary extends React.Component<{ children: ReactNode }, { hasError: boolean }> {
-  constructor(props: { children: ReactNode }) {
-    super(props);
-    this.state = { hasError: false };
-  }
+const MedicationPriceChart = React.lazy(() => import('../organisms/MedicationPriceChart'));
+const ResearchFundingChart = React.lazy(() => import('../organisms/ResearchFundingChart'));
+const ClinicalTrialsChart = React.lazy(() => import('../organisms/ClinicalTrialsChart'));
 
-  static getDerivedStateFromError(_: Error) {
-    return { hasError: true };
-  }
-
-  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.error("Uncaught error:", error, errorInfo);
-  }
-
-  render() {
-    if (this.state.hasError) {
-      return <Typography color="error">Something went wrong.</Typography>;
-    }
-
-    return this.props.children;
-  }
-}
+const ChartWrapper = React.memo(({ children, label }: { children: React.ReactNode; label: string }) => (
+  <ErrorBoundary>
+    <Suspense fallback={<CircularProgress />}>
+      <Box aria-label={label}>
+        {children}
+      </Box>
+    </Suspense>
+  </ErrorBoundary>
+));
 
 export const DashboardTemplate: React.FC = () => {
   const { t } = useTranslation();
+  const [data, setData] = useState<{ medicationData: any; researchData: any } | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [medicationModule, researchModule] = await Promise.all([
+          import('../../data/data_exemple2.json'),
+          import('../../data/data_exemple3.json')
+        ]);
+        setData({
+          medicationData: medicationModule.default,
+          researchData: researchModule.default
+        });
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        // Handle error (e.g., show error message)
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (!data) {
+    return <CircularProgress />;
+  }
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3, p: 3 }}>
-      <Typography variant="h4">{t('dashboard.title')}</Typography>
+      <Typography variant="h4" component="h1">{t('dashboard.title')}</Typography>
       <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, gap: 3 }}>
-        <Box sx={{ flex: 1 }}>
-          <ErrorBoundary>
-            <MedicationPriceChart />
-          </ErrorBoundary>
+        <Box sx={{ flex: 1, minHeight: '300px' }}>
+          <ChartWrapper label={t('dashboard.medicationChart')}>
+            <MedicationPriceChart data={data.medicationData} />
+          </ChartWrapper>
         </Box>
-        <Box sx={{ flex: 1 }}>
-          <ErrorBoundary>
-            <ResearchFundingChart />
-          </ErrorBoundary>
+        <Box sx={{ flex: 1, minHeight: '300px' }}>
+          <ChartWrapper label={t('dashboard.researchFundingChart')}>
+            <ResearchFundingChart data={data.researchData} />
+          </ChartWrapper>
         </Box>
       </Box>
-      <Box>
-        <ErrorBoundary>
-          <ClinicalTrialsChart />
-        </ErrorBoundary>
+      <Box sx={{ minHeight: '300px' }}>
+        <ChartWrapper label={t('dashboard.clinicalTrialsChart')}>
+          <ClinicalTrialsChart data={data.researchData} />
+        </ChartWrapper>
       </Box>
     </Box>
   );

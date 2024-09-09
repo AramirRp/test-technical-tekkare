@@ -1,16 +1,22 @@
 {
-  "dashboard": {
-    "title": "Tableau de bord",
-    "medicationChart": "Historique des prix des médicaments",
-    "researchFundingChart": "Répartition du financement de la recherche",
-    "clinicalTrialsChart": "Participants aux essais cliniques"
-  },
-  "languageSwitch": "Passer à l'anglais",
-  "loading": "Chargement...",
-  "allMolecules": "Toutes les molécules",
-  "priceEUR": "Prix (EUR)",
-  "priceUSD": "Prix (USD)",
-  "allFields": "Tous les domaines",
-  "allStatuses": "Tous les statuts",
-  "condition":"test"
+"fr": {
+    "dashboard": {
+      "title": "Tableau de bord",
+      "medicationChart": "Historique des prix des médicaments",
+      "researchFundingChart": "Répartition du financement de la recherche",
+      "clinicalTrialsChart": "Participants aux essais cliniques"
+    },
+    "languageSwitch": "Passer à l'anglais",
+    "loading": "Chargement...",
+    "allMolecules": "Toutes les molécules",
+    "priceEUR": "Prix (EUR)",
+    "priceUSD": "Prix (USD)",
+    "allFields": "Tous les domaines",
+    "allStatuses": "Tous les statuts",
+    "completed": "Terminé",
+    "ongoing": "En cours",
+    "pending": "En attente",
+    "participants": "Participants",
+    "conditions":"coucou"
+  }
 }

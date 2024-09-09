@@ -1,11 +1,31 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { LineChartWithSelect } from '../molecules/LineChartWithSelect';
 import { Box, CircularProgress, Typography } from '@mui/material';
 
+interface Medication {
+  name: string;
+  dosage: string;
+  priceHistory: Array<{
+    date: string;
+    priceEUR: number;
+    priceUSD: number;
+  }>;
+}
+
+interface Molecule {
+  name: string;
+  description: string;
+  medications: Medication[];
+}
+
+interface MedicationData {
+  molecules: Molecule[];
+}
+
 const MedicationPriceChart: React.FC = () => {
   const { t } = useTranslation();
-  const [medicationData, setMedicationData] = useState<any>(null);
+  const [medicationData, setMedicationData] = useState<MedicationData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedMolecule, setSelectedMolecule] = useState('all');
@@ -19,23 +39,29 @@ const MedicationPriceChart: React.FC = () => {
       })
       .catch(err => {
         console.error("Failed to load medication data:", err);
-        setError("Failed to load medication data");
+        setError(t('error.failedToLoadData'));
         setLoading(false);
       });
-  }, []);
+  }, [t]);
 
-  if (loading) return <Box display="flex" justifyContent="center"><CircularProgress /></Box>;
-  if (error) return <Typography color="error">{error}</Typography>;
-  if (!medicationData) return <Typography>{t('noDataAvailable')}</Typography>;
+  const chartData = useMemo(() => {
+    if (!medicationData) return [];
+    return medicationData.molecules
+      .filter(mol => selectedMolecule === 'all' || mol.name === selectedMolecule)
+      .flatMap(mol => mol.medications[0].priceHistory);
+  }, [medicationData, selectedMolecule]);
 
-  const chartData = medicationData.molecules
-    .filter((mol: any) => selectedMolecule === 'all' || mol.name === selectedMolecule)
-    .flatMap((mol: any) => mol.medications[0].priceHistory);
+  const moleculeOptions = useMemo(() => {
+    if (!medicationData) return [{ value: 'all', label: t('allMolecules') }];
+    return [
+      { value: 'all', label: t('allMolecules') },
+      ...medicationData.molecules.map(mol => ({ value: mol.name, label: mol.name }))
+    ];
+  }, [medicationData, t]);
 
-  const moleculeOptions = [
-    { value: 'all', label: t('allMolecules') },
-    ...medicationData.molecules.map((mol: any) => ({ value: mol.name, label: mol.name }))
-  ];
+  if (loading) return <Box display="flex" justifyContent="center" aria-label={t('loading')}><CircularProgress /></Box>;
+  if (error) return <Typography color="error" aria-label={t('error')}>{error}</Typography>;
+  if (!medicationData) return <Typography aria-label={t('noDataAvailable')}>{t('noDataAvailable')}</Typography>;
 
   return (
     <LineChartWithSelect
@@ -49,6 +75,7 @@ const MedicationPriceChart: React.FC = () => {
         { dataKey: "priceEUR", stroke: "#8884d8", name: t('priceEUR') },
         { dataKey: "priceUSD", stroke: "#82ca9d", name: t('priceUSD') }
       ]}
+      aria-label={t('dashboard.medicationChart')}
     />
   );
 };
