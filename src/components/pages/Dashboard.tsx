@@ -85,9 +85,9 @@ export const Dashboard: React.FC = () => {
 
   return (
     <DashboardTemplate>
-      <MedicationPriceChart data={medicationData} />
-      <ResearchFundingChart data={researchData} />
-      <ClinicalTrialsChart data={researchData} />
+      {medicationData && <MedicationPriceChart data={medicationData} />}
+      {researchData && <ResearchFundingChart data={researchData} />}
+      {researchData && <ClinicalTrialsChart data={researchData} />}
     </DashboardTemplate>
   );
 };
