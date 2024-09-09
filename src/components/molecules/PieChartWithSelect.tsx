@@ -2,7 +2,7 @@ import React from 'react';
 import { ResponsiveContainer, PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
 import { Select, SelectOption } from '../atoms/select';
 import { ChartContainer } from '../atoms/ChartContainer';
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 
 interface PieChartData {
   name: string;
@@ -51,7 +51,7 @@ export const PieChartWithSelect: React.FC<PieChartWithSelectProps> = ({
           dataKey={dataKey}
           nameKey={nameKey}
         >
-          {data.map((entry, index) => (
+          {data.map((_, index) => (
             <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
           ))}
         </Pie>

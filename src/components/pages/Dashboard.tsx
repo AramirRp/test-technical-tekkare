@@ -22,6 +22,15 @@ interface MedicationData {
   }>;
 }
 
+interface ClinicalTrial {
+  trialName: string;
+  phase: string;
+  startDate: string;
+  endDate: string;
+  totalParticipants: number;
+  status: string;
+}
+
 interface ResearchProject {
   projectName: string;
   researchField: string;
@@ -32,12 +41,7 @@ interface ResearchProject {
       amount: number;
     }>;
   };
-  clinicalTrials: Array<{
-    trialName: string;
-    phase: string;
-    totalParticipants: number;
-    status: string;
-  }>;
+  clinicalTrials: ClinicalTrial[];
 }
 
 type ResearchData = ResearchProject[];
@@ -74,18 +78,4 @@ export const Dashboard: React.FC = () => {
     return (
       <Box display="flex" justifyContent="center" alignItems="center" height="100vh">
         <CircularProgress />
-        <Typography ml={2}>{t('loading')}</Typography>
-      </Box>
-    );
-  }
-
-  return (
-    <DashboardTemplate>
-      <MedicationPriceChart data={medicationData} />
-      <ResearchFundingChart data={researchData} />
-      <ClinicalTrialsChart data={researchData} />
-    </DashboardTemplate>
-  );
-};
-
-export default Dashboard;
+        <Typography ml

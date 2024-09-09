@@ -30,7 +30,11 @@ const ClinicalTrialsChart: React.FC<ClinicalTrialsChartProps> = ({ data }) => {
     if (!data.length) return [];
     return data
       .flatMap(project => project.clinicalTrials)
-      .filter(trial => selectedTrialStatus === 'all' || trial.status === selectedTrialStatus);
+      .filter(trial => selectedTrialStatus === 'all' || trial.status === selectedTrialStatus)
+      .map(trial => ({
+        ...trial,
+        [trial.trialName]: trial.totalParticipants
+      }));
   }, [data, selectedTrialStatus]);
 
   const trialStatusOptions = useMemo(() => {
