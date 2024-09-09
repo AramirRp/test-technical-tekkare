@@ -1,12 +1,18 @@
 import React from 'react';
-import { ResponsiveContainer, PieChart as RechartsePieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
-import { Select } from '../atoms/select';
+import { ResponsiveContainer, PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
+import { Select, SelectOption } from '../atoms/select';
 import { ChartContainer } from '../atoms/ChartContainer';
+import { Box, Typography } from '@mui/material';
+
+interface PieChartData {
+  name: string;
+  value: number;
+}
 
 interface PieChartWithSelectProps {
   title: string;
-  data: any[];
-  selectOptions: { value: string; label: string }[];
+  data: PieChartData[];
+  selectOptions: SelectOption[];
   selectedValue: string;
   onSelectChange: (value: string) => void;
   dataKey: string;
@@ -15,17 +21,26 @@ interface PieChartWithSelectProps {
 }
 
 export const PieChartWithSelect: React.FC<PieChartWithSelectProps> = ({
-  title, data, selectOptions, selectedValue, onSelectChange, dataKey, nameKey, colors
+  title,
+  data,
+  selectOptions,
+  selectedValue,
+  onSelectChange,
+  dataKey,
+  nameKey,
+  colors
 }) => (
   <ChartContainer title={title}>
-    <Select
-      label={title}
-      value={selectedValue}
-      onChange={onSelectChange}
-      options={selectOptions}
-    />
+    <Box mb={2}>
+      <Select
+        label={title}
+        value={selectedValue}
+        onChange={onSelectChange}
+        options={selectOptions}
+      />
+    </Box>
     <ResponsiveContainer width="100%" height={300}>
-      <RechartsePieChart>
+      <PieChart>
         <Pie
           data={data}
           cx="50%"
@@ -42,7 +57,9 @@ export const PieChartWithSelect: React.FC<PieChartWithSelectProps> = ({
         </Pie>
         <Tooltip />
         <Legend />
-      </RechartsePieChart>
+      </PieChart>
     </ResponsiveContainer>
   </ChartContainer>
 );
+
+export default PieChartWithSelect;

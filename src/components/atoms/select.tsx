@@ -8,6 +8,10 @@ interface SelectProps {
   options: { value: string; label: string }[];
 }
 
+export interface SelectOption {
+  value: string;
+  label: string;
+}
 
 export const Select: React.FC<SelectProps> = ({ label, value, onChange, options }) => (
   <FormControl fullWidth sx={{ mb: 2 }}>

@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import BarChartWithSelect from '../molecules/BarChartWithSelect';
+import { BarChartWithSelect } from '../molecules/BarChartWithSelect';
 import { Box, Typography } from '@mui/material';
 
 interface ClinicalTrial {
@@ -15,71 +15,51 @@ interface ClinicalTrial {
 interface ResearchProject {
   projectName: string;
   researchField: string;
-  leadInstitution: string;
-  startDate: string;
-  endDate: string;
-  funding: {
-    totalAmount: number;
-    sources: Array<{ name: string; amount: number }>;
-  };
-  researchTeam: Array<{ name: string; role: string; specialty: string }>;
-  milestones: Array<{ name: string; completionDate: string; status: string }>;
-  publications: Array<{ title: string; journal: string; publicationDate: string; doi: string }>;
   clinicalTrials: ClinicalTrial[];
 }
 
-const ClinicalTrialsChart: React.FC = () => {
+interface ClinicalTrialsChartProps {
+  data: ResearchProject[];
+}
+
+const ClinicalTrialsChart: React.FC<ClinicalTrialsChartProps> = ({ data }) => {
   const { t } = useTranslation();
-  const [researchData, setResearchData] = useState<ResearchProject[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
   const [selectedTrialStatus, setSelectedTrialStatus] = useState('all');
 
-  useEffect(() => {
-    setLoading(true);
-    import('../../data/data_exemple3.json')
-      .then(module => {
-        setResearchData(module.default);
-        setLoading(false);
-      })
-      .catch(err => {
-        console.error("Failed to load research data:", err);
-        setError(t('error.failedToLoadData'));
-        setLoading(false);
-      });
-  }, [t]);
-
   const chartData = useMemo(() => {
-    if (!researchData.length) return [];
-    return researchData
+    if (!data.length) return [];
+    return data
       .flatMap(project => project.clinicalTrials)
       .filter(trial => selectedTrialStatus === 'all' || trial.status === selectedTrialStatus);
-  }, [researchData, selectedTrialStatus]);
+  }, [data, selectedTrialStatus]);
 
-  const trialStatusOptions = [
-    { value: 'all', label: t('allStatuses') },
-    { value: 'Completed', label: t('completed') },
-    { value: 'Ongoing', label: t('ongoing') },
-    { value: 'Pending', label: t('pending') }
-  ];
+  const trialStatusOptions = useMemo(() => {
+    const statuses = Array.from(new Set(data.flatMap(project => project.clinicalTrials.map(trial => trial.status))));
+    return [
+      { value: 'all', label: t('allStatuses') },
+      ...statuses.map(status => ({ value: status, label: t(status.toLowerCase()) }))
+    ];
+  }, [data, t]);
 
-  if (loading) return <Box display="flex" justifyContent="center" aria-label={t('loading')}><CircularProgress /></Box>;
-  if (error) return <Typography color="error" aria-label={t('error')}>{error}</Typography>;
-  if (!researchData.length) return <Typography aria-label={t('noDataAvailable')}>{t('noDataAvailable')}</Typography>;
+  if (!data.length) return <Typography>{t('noDataAvailable')}</Typography>;
 
   return (
-    <BarChartWithSelect
-      title={t('dashboard.clinicalTrialsChart')}
-      data={chartData}
-      selectOptions={trialStatusOptions}
-      selectedValue={selectedTrialStatus}
-      onSelectChange={setSelectedTrialStatus}
-      xAxisDataKey="trialName"
-      barDataKey="totalParticipants"
-      barName={t('participants')}
-      barColor="#8884d8"
-      aria-label={t('dashboard.clinicalTrialsChart')}
-    />
+    <Box>
+      <Typography variant="h6" gutterBottom>
+        {t('dashboard.clinicalTrialsChart')}
+      </Typography>
+      <BarChartWithSelect
+        title={t('dashboard.clinicalTrialsChart')}
+        data={chartData}
+        selectOptions={trialStatusOptions}
+        selectedValue={selectedTrialStatus}
+        onSelectChange={setSelectedTrialStatus}
+        xAxisDataKey="trialName"
+        barDataKey="totalParticipants"
+        barName={t('participants')}
+        barColor="#8884d8"
+      />
+    </Box>
   );
 };
 
