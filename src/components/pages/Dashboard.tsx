@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { CircularProgress, Typography, Box } from '@mui/material';
 import DashboardTemplate from '../template/DashboardTemplate';
-import MedicationPriceChart, { MedicationData } from '../organisms/MedicationPriceChart';
+import MedicationPriceChart from '../organisms/MedicationPriceChart';
 import ResearchFundingChart from '../organisms/ResearchFundingChart';
 import ClinicalTrialsChart from '../organisms/ClinicalTrialsChart';
 import FloatingLanguageSwitch from '../molecules/FloatingLanguageSwitch';
