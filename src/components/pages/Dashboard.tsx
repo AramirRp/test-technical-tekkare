@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { CircularProgress, Typography, Box } from '@mui/material';
-import  DashboardTemplate  from '../template/DashboardTemplate';
-import  MedicationPriceChart  from '../organisms/MedicationPriceChart';
-import  ResearchFundingChart  from '../organisms/ResearchFundingChart';
-import  ClinicalTrialsChart  from '../organisms/ClinicalTrialsChart';
+import DashboardTemplate from '../template/DashboardTemplate';
+import MedicationPriceChart from '../organisms/MedicationPriceChart';
+import ResearchFundingChart from '../organisms/ResearchFundingChart';
+import ClinicalTrialsChart from '../organisms/ClinicalTrialsChart';
 
 interface MedicationData {
   molecules: Array<{
@@ -22,7 +22,7 @@ interface MedicationData {
   }>;
 }
 
-interface ResearchData {
+interface ResearchProject {
   projectName: string;
   researchField: string;
   funding: {
@@ -39,6 +39,8 @@ interface ResearchData {
     status: string;
   }>;
 }
+
+type ResearchData = ResearchProject[];
 
 export const Dashboard: React.FC = () => {
   const [medicationData, setMedicationData] = useState<MedicationData | null>(null);
@@ -76,4 +78,14 @@ export const Dashboard: React.FC = () => {
       </Box>
     );
   }
+
+  return (
+    <DashboardTemplate>
+      <MedicationPriceChart data={medicationData} />
+      <ResearchFundingChart data={researchData} />
+      <ClinicalTrialsChart data={researchData} />
+    </DashboardTemplate>
+  );
 };
+
+export default Dashboard;

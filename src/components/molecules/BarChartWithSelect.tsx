@@ -1,12 +1,18 @@
+// src/components/molecules/BarChartWithSelect.tsx
+
 import React from 'react';
 import { ResponsiveContainer, BarChart as RechartsBarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
-import { Select } from '../atoms/select'
+import { Select, SelectOption } from '../atoms/select';
 import { ChartContainer } from '../atoms/ChartContainer';
+
+interface DataPoint {
+  [key: string]: string | number;
+}
 
 interface BarChartWithSelectProps {
   title: string;
-  data: any[];
-  selectOptions: { value: string; label: string }[];
+  data: DataPoint[];
+  selectOptions: SelectOption[];
   selectedValue: string;
   onSelectChange: (value: string) => void;
   xAxisDataKey: string;
@@ -16,7 +22,15 @@ interface BarChartWithSelectProps {
 }
 
 export const BarChartWithSelect: React.FC<BarChartWithSelectProps> = ({
-  title, data, selectOptions, selectedValue, onSelectChange, xAxisDataKey, barDataKey, barName, barColor
+  title,
+  data,
+  selectOptions,
+  selectedValue,
+  onSelectChange,
+  xAxisDataKey,
+  barDataKey,
+  barName,
+  barColor
 }) => (
   <ChartContainer title={title}>
     <Select
@@ -37,3 +51,5 @@ export const BarChartWithSelect: React.FC<BarChartWithSelectProps> = ({
     </ResponsiveContainer>
   </ChartContainer>
 );
+
+export default BarChartWithSelect;

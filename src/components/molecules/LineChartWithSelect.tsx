@@ -1,20 +1,38 @@
 import React from 'react';
 import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
-import { Select } from '../atoms/select';
+import { Select, SelectOption } from '../atoms/select';
 import { ChartContainer } from '../atoms/ChartContainer';
+
+interface PriceHistory {
+  date: string;
+  priceEUR: number;
+  priceUSD: number;
+}
+
+interface LineData {
+  dataKey: keyof PriceHistory;
+  stroke: string;
+  name: string;
+}
 
 interface LineChartWithSelectProps {
   title: string;
-  data: any[];
-  selectOptions: { value: string; label: string }[];
+  data: PriceHistory[];
+  selectOptions: SelectOption[];
   selectedValue: string;
   onSelectChange: (value: string) => void;
-  xAxisDataKey: string;
-  lines: { dataKey: string; stroke: string; name: string }[];
+  xAxisDataKey: keyof PriceHistory;
+  lines: LineData[];
 }
 
 export const LineChartWithSelect: React.FC<LineChartWithSelectProps> = ({
-  title, data, selectOptions, selectedValue, onSelectChange, xAxisDataKey, lines
+  title,
+  data,
+  selectOptions,
+  selectedValue,
+  onSelectChange,
+  xAxisDataKey,
+  lines
 }) => (
   <ChartContainer title={title}>
     <Select
@@ -31,9 +49,17 @@ export const LineChartWithSelect: React.FC<LineChartWithSelectProps> = ({
         <Tooltip />
         <Legend />
         {lines.map((line) => (
-          <Line key={line.dataKey} type="monotone" {...line} />
+          <Line 
+            key={line.dataKey} 
+            type="monotone" 
+            dataKey={line.dataKey} 
+            stroke={line.stroke} 
+            name={line.name} 
+          />
         ))}
       </LineChart>
     </ResponsiveContainer>
   </ChartContainer>
 );
+
+export default LineChartWithSelect;

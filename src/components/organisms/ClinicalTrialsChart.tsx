@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { BarChartWithSelect } from '../molecules/BarChartWithSelect';
-import { Box, CircularProgress, Typography } from '@mui/material';
+import BarChartWithSelect from '../molecules/BarChartWithSelect';
+import { Box, Typography } from '@mui/material';
 
 interface ClinicalTrial {
   trialName: string;
@@ -9,11 +9,22 @@ interface ClinicalTrial {
   startDate: string;
   endDate: string;
   totalParticipants: number;
-  status: 'Completed' | 'Ongoing' | 'Pending';
+  status: string;
 }
 
 interface ResearchProject {
   projectName: string;
+  researchField: string;
+  leadInstitution: string;
+  startDate: string;
+  endDate: string;
+  funding: {
+    totalAmount: number;
+    sources: Array<{ name: string; amount: number }>;
+  };
+  researchTeam: Array<{ name: string; role: string; specialty: string }>;
+  milestones: Array<{ name: string; completionDate: string; status: string }>;
+  publications: Array<{ title: string; journal: string; publicationDate: string; doi: string }>;
   clinicalTrials: ClinicalTrial[];
 }
 

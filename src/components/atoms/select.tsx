@@ -8,6 +8,7 @@ interface SelectProps {
   options: { value: string; label: string }[];
 }
 
+
 export const Select: React.FC<SelectProps> = ({ label, value, onChange, options }) => (
   <FormControl fullWidth sx={{ mb: 2 }}>
     <InputLabel>{label}</InputLabel>

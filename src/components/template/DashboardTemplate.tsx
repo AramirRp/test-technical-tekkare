@@ -6,17 +6,67 @@ const MedicationPriceChart = React.lazy(() => import('../organisms/MedicationPri
 const ResearchFundingChart = React.lazy(() => import('../organisms/ResearchFundingChart'));
 const ClinicalTrialsChart = React.lazy(() => import('../organisms/ClinicalTrialsChart'));
 
-const ChartWrapper = React.memo(({ children, label }: { children: React.ReactNode; label: string }) => (
-    <Suspense fallback={<CircularProgress />}>
-      <Box aria-label={label}>
-        {children}
-      </Box>
-    </Suspense>
+interface Medication {
+  name: string;
+  dosage: string;
+  priceHistory: Array<{
+    date: string;
+    priceEUR: number;
+    priceUSD: number;
+  }>;
+}
+
+interface Molecule {
+  name: string;
+  description: string;
+  medications: Medication[];
+}
+
+interface MedicationData {
+  molecules: Molecule[];
+}
+
+interface ClinicalTrial {
+  trialName: string;
+  phase: string;
+  startDate: string;
+  endDate: string;
+  totalParticipants: number;
+  status: string;
+}
+
+interface ResearchProject {
+  projectName: string;
+  researchField: string;
+  leadInstitution: string;
+  startDate: string;
+  endDate: string;
+  funding: {
+    totalAmount: number;
+    sources: Array<{ name: string; amount: number }>;
+  };
+  researchTeam: Array<{ name: string; role: string; specialty: string }>;
+  milestones: Array<{ name: string; completionDate: string; status: string }>;
+  publications: Array<{ title: string; journal: string; publicationDate: string; doi: string }>;
+  clinicalTrials: ClinicalTrial[];
+}
+
+interface DashboardData {
+  medicationData: MedicationData;
+  researchData: ResearchProject[];
+}
+
+const ChartWrapper: React.FC<{ children: React.ReactNode; label: string }> = React.memo(({ children, label }) => (
+  <Suspense fallback={<CircularProgress />}>
+    <Box aria-label={label}>
+      {children}
+    </Box>
+  </Suspense>
 ));
 
 export const DashboardTemplate: React.FC = () => {
   const { t } = useTranslation();
-  const [data, setData] = useState<{ medicationData: any; researchData: any } | null>(null);
+  const [data, setData] = useState<DashboardData | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,8 +76,8 @@ export const DashboardTemplate: React.FC = () => {
           import('../../data/data_exemple3.json')
         ]);
         setData({
-          medicationData: medicationModule.default,
-          researchData: researchModule.default
+          medicationData: medicationModule.default as MedicationData,
+          researchData: researchModule.default as ResearchProject[]
         });
       } catch (error) {
         console.error('Error fetching data:', error);
