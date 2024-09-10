@@ -13,3 +13,9 @@ For the purpose of this technical test, I had a total freedom to choose what I w
 - React Routeur
 - Redux Toolkit
 - i18n
+
+## What's in Here
+
+- 3 charts are present, using the different data present.
+- almost everything is translated in french & english
+- filters are present for each charts
