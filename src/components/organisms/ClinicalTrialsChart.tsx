@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { BarChartWithSelect } from '../molecules/BarChartWithSelect';
 import { Box, Typography, Paper } from '@mui/material';
+import { SelectOption } from '../atoms/select';
 
 interface ClinicalTrial {
   trialName: string;
@@ -37,7 +38,7 @@ const ClinicalTrialsChart: React.FC<ClinicalTrialsChartProps> = ({ data }) => {
       })));
   }, [data, selectedResearchField]);
 
-  const researchFieldOptions = useMemo(() => {
+  const researchFieldOptions: SelectOption[] = useMemo(() => {
     const fields = Array.from(new Set(data.map(project => project.researchField)));
     return [
       { value: 'all', label: t('allFields') },
@@ -51,19 +52,11 @@ const ClinicalTrialsChart: React.FC<ClinicalTrialsChartProps> = ({ data }) => {
   if (!data.length) return <Typography>{t('noDataAvailable')}</Typography>;
 
   return (
-    <Paper elevation={3} sx={{ p: 3, height: '100%', minHeight: 500 }}>
+    <Paper elevation={3} sx={{ p: 3, height: '100%', minHeight: 600 }}>
       <Typography variant="h6" gutterBottom>
         {t('dashboard.clinicalTrialsChart')}
       </Typography>
-      <Box mb={2}>
-        <Typography variant="subtitle1">
-          {t('totalTrials')}: {totalTrials}
-        </Typography>
-        <Typography variant="subtitle1">
-          {t('totalParticipants')}: {totalParticipants}
-        </Typography>
-      </Box>
-      <Box height="calc(100% - 120px)">
+      <Box height="calc(100% - 60px)">
         <BarChartWithSelect
           data={chartData}
           selectOptions={researchFieldOptions}
@@ -72,9 +65,16 @@ const ClinicalTrialsChart: React.FC<ClinicalTrialsChartProps> = ({ data }) => {
           xAxisDataKey="trialName"
           barDataKey="totalParticipants"
           barName={t('participants')}
-          barColor="#8884d8"
           groupBy="phase"
         />
+        <Box mt={2}>
+          <Typography variant="subtitle1">
+            {t('totalTrials')}: {totalTrials}
+          </Typography>
+          <Typography variant="subtitle1">
+            {t('totalParticipants')}: {totalParticipants}
+          </Typography>
+        </Box>
       </Box>
     </Paper>
   );
