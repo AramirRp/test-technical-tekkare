@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import { ResponsiveContainer, BarChart as RechartsBarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Cell } from 'recharts';
 import { Select, SelectOption } from '../atoms/select';
 import { Box, Typography } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 interface DataPoint {
   [key: string]: string | number;
@@ -28,6 +29,9 @@ export const BarChartWithSelect: React.FC<BarChartWithSelectProps> = ({
   barName,
   groupBy
 }) => {
+
+  const { t } = useTranslation();
+
   const groupedData = useMemo(() => {
     return data.reduce((acc, item) => {
       const key = item[groupBy] as string;
@@ -57,7 +61,6 @@ export const BarChartWithSelect: React.FC<BarChartWithSelectProps> = ({
     return null;
   };
 
-  const totalTrials = data.length;
   const totalParticipants = data.reduce((sum, item) => sum + (item[barDataKey] as number), 0);
 
   return (
@@ -71,12 +74,9 @@ export const BarChartWithSelect: React.FC<BarChartWithSelectProps> = ({
         />
       </Box>
       <Box mb={2}>
-        <Typography variant="subtitle1">
-          Total Trials: {totalTrials}
-        </Typography>
-        <Typography variant="subtitle1">
-          Total Participants: {totalParticipants}
-        </Typography>
+          <Typography variant="subtitle1">
+            {t('totalParticipants')}: {totalParticipants}
+          </Typography>
       </Box>
       <ResponsiveContainer width="100%" height={500}>
         <RechartsBarChart 

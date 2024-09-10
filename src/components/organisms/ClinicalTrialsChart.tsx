@@ -46,9 +46,6 @@ const ClinicalTrialsChart: React.FC<ClinicalTrialsChartProps> = ({ data }) => {
     ];
   }, [data, t]);
 
-  const totalTrials = chartData.length;
-  const totalParticipants = chartData.reduce((sum, trial) => sum + trial.totalParticipants, 0);
-
   if (!data.length) return <Typography>{t('noDataAvailable')}</Typography>;
 
   return (
@@ -68,12 +65,6 @@ const ClinicalTrialsChart: React.FC<ClinicalTrialsChartProps> = ({ data }) => {
           groupBy="phase"
         />
         <Box mt={2}>
-          <Typography variant="subtitle1">
-            {t('totalTrials')}: {totalTrials}
-          </Typography>
-          <Typography variant="subtitle1">
-            {t('totalParticipants')}: {totalParticipants}
-          </Typography>
         </Box>
       </Box>
     </Paper>

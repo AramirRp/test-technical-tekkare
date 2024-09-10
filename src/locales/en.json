@@ -26,6 +26,7 @@
     "participants": "Participants",
     "conditions": "coucou",
     "totalFunding": "Total Funding",
-    "selectResearchField": "Select Research Field"
+    "selectResearchField": "Select Research Field",
+    "totalParticipants" : "Total Participants"
   }
 }
