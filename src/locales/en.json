@@ -15,6 +15,7 @@
     "languageSwitch": "Switch to French",
     "loading": "Loading...",
     "allMolecules": "All Molecules",
+    "selectMolecules":"Molecules selected",
     "priceEUR": "Price (EUR)",
     "priceUSD": "Price (USD)",
     "allFields": "All Fields",
@@ -23,6 +24,8 @@
     "ongoing": "Ongoing",
     "pending": "Pending",
     "participants": "Participants",
-    "conditions": "coucou"
+    "conditions": "coucou",
+    "totalFunding": "Total Funding",
+    "selectResearchField": "Select Research Field"
   }
 }

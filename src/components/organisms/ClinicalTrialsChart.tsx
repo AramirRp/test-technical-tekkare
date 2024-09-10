@@ -1,69 +1,54 @@
 import React, { useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { BarChartWithSelect } from '../molecules/BarChartWithSelect';
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, Paper } from '@mui/material';
 
-interface ClinicalTrial {
-  trialName: string;
-  phase: string;
-  startDate: string;
-  endDate: string;
-  totalParticipants: number;
-  status: string;
-}
-
-interface ResearchProject {
-  projectName: string;
-  researchField: string;
-  clinicalTrials: ClinicalTrial[];
-}
-
-interface ClinicalTrialsChartProps {
-  data: ResearchProject[];
-}
+// ... (keep your existing interfaces)
 
 const ClinicalTrialsChart: React.FC<ClinicalTrialsChartProps> = ({ data }) => {
   const { t } = useTranslation();
-  const [selectedTrialStatus, setSelectedTrialStatus] = useState('all');
+  const [selectedResearchField, setSelectedResearchField] = useState('all');
 
   const chartData = useMemo(() => {
     if (!data.length) return [];
     return data
-      .flatMap(project => project.clinicalTrials)
-      .filter(trial => selectedTrialStatus === 'all' || trial.status === selectedTrialStatus)
-      .map(trial => ({
+      .filter(project => selectedResearchField === 'all' || project.researchField === selectedResearchField)
+      .flatMap(project => project.clinicalTrials.map(trial => ({
         ...trial,
-        [trial.trialName]: trial.totalParticipants
-      }));
-  }, [data, selectedTrialStatus]);
+        researchField: project.researchField,
+        projectName: project.projectName
+      })));
+  }, [data, selectedResearchField]);
 
-  const trialStatusOptions = useMemo(() => {
-    const statuses = Array.from(new Set(data.flatMap(project => project.clinicalTrials.map(trial => trial.status))));
+  const researchFieldOptions = useMemo(() => {
+    const fields = Array.from(new Set(data.map(project => project.researchField)));
     return [
-      { value: 'all', label: t('allStatuses') },
-      ...statuses.map(status => ({ value: status, label: t(status.toLowerCase()) }))
+      { value: 'all', label: t('allFields') },
+      ...fields.map(field => ({ value: field, label: field }))
     ];
   }, [data, t]);
 
   if (!data.length) return <Typography>{t('noDataAvailable')}</Typography>;
 
   return (
-    <Box>
+    <Paper elevation={3} sx={{ p: 3, height: '100%', minHeight: 500 }}>
       <Typography variant="h6" gutterBottom>
         {t('dashboard.clinicalTrialsChart')}
       </Typography>
-      <BarChartWithSelect
-        title={t('dashboard.clinicalTrialsChart')}
-        data={chartData}
-        selectOptions={trialStatusOptions}
-        selectedValue={selectedTrialStatus}
-        onSelectChange={setSelectedTrialStatus}
-        xAxisDataKey="trialName"
-        barDataKey="totalParticipants"
-        barName={t('participants')}
-        barColor="#8884d8"
-      />
-    </Box>
+      <Box height="calc(100% - 60px)">
+        <BarChartWithSelect
+          data={chartData}
+          selectOptions={researchFieldOptions}
+          selectedValue={selectedResearchField}
+          onSelectChange={setSelectedResearchField}
+          xAxisDataKey="trialName"
+          barDataKey="totalParticipants"
+          barName={t('participants')}
+          barColor="#8884d8"
+          groupBy="phase"
+        />
+      </Box>
+    </Paper>
   );
 };
 

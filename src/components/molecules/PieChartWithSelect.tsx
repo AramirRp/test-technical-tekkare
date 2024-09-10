@@ -1,8 +1,15 @@
-import React from 'react';
-import { ResponsiveContainer, PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
-import { Select, SelectOption } from '../atoms/select';
-import { ChartContainer } from '../atoms/ChartContainer';
-import { Box } from '@mui/material';
+import React from "react";
+import {
+  ResponsiveContainer,
+  PieChart,
+  Pie,
+  Cell,
+  Tooltip,
+  Legend,
+} from "recharts";
+import { Select, SelectOption } from "../atoms/select";
+import { Box, Typography } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 interface PieChartData {
   name: string;
@@ -10,7 +17,6 @@ interface PieChartData {
 }
 
 interface PieChartWithSelectProps {
-  title: string;
   data: PieChartData[];
   selectOptions: SelectOption[];
   selectedValue: string;
@@ -18,48 +24,98 @@ interface PieChartWithSelectProps {
   dataKey: string;
   nameKey: string;
   colors: string[];
+  totalFunding: number;
 }
 
 export const PieChartWithSelect: React.FC<PieChartWithSelectProps> = ({
-  title,
   data,
   selectOptions,
   selectedValue,
   onSelectChange,
   dataKey,
   nameKey,
-  colors
-}) => (
-  <ChartContainer title={title}>
-    <Box mb={2}>
-      <Select
-        label={title}
-        value={selectedValue}
-        onChange={onSelectChange}
-        options={selectOptions}
-      />
-    </Box>
-    <ResponsiveContainer width="100%" height={300}>
-      <PieChart>
-        <Pie
-          data={data}
-          cx="50%"
-          cy="50%"
-          labelLine={false}
-          outerRadius={80}
-          fill="#8884d8"
-          dataKey={dataKey}
-          nameKey={nameKey}
+  colors,
+  totalFunding,
+}) => {
+  const { t } = useTranslation();
+
+  const CustomTooltip = ({ active, payload }: any) => {
+    if (active && payload && payload.length) {
+      const data = payload[0].payload;
+      const percentage = ((data[dataKey] / totalFunding) * 100).toFixed(2);
+      return (
+        <Box
+          sx={{ bgcolor: "background.paper", p: 2, border: "1px solid #ccc" }}
         >
-          {data.map((_, index) => (
-            <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
-          ))}
-        </Pie>
-        <Tooltip />
-        <Legend />
-      </PieChart>
-    </ResponsiveContainer>
-  </ChartContainer>
-);
+          <Typography variant="body2">{`${data[nameKey]}: $${data[
+            dataKey
+          ].toLocaleString()} (${percentage}%)`}</Typography>
+        </Box>
+      );
+    }
+    return null;
+  };
+
+  const renderColorfulLegendText = (value: string, entry: any) => {
+    const { color } = entry;
+    return <span style={{ color, fontSize: "0.75rem" }}>{value}</span>;
+  };
+
+  return (
+    <Box sx={{ display: "flex", flexDirection: "column", height: "100%" }}>
+      <Box mb={2}>
+        <Select
+          label={t("selectResearchField")}
+          value={selectedValue}
+          onChange={onSelectChange}
+          options={selectOptions}
+        />
+      </Box>
+      <Typography variant="subtitle1" sx={{ mb: 2 }}>
+        {t("totalFunding")}: ${totalFunding.toLocaleString()}
+      </Typography>
+      <Box sx={{ flex: 1, position: "relative", minHeight: 300 }}>
+        <ResponsiveContainer width="100%" height="100%">
+          <PieChart>
+            <Pie
+              data={data}
+              cx="50%"
+              cy="50%"
+              labelLine={false}
+              outerRadius="80%"
+              fill="#8884d8"
+              dataKey={dataKey}
+              nameKey={nameKey}
+            >
+              {data.map((entry, index) => (
+                <Cell
+                  key={`cell-${index}`}
+                  fill={colors[index % colors.length]}
+                />
+              ))}
+            </Pie>
+            <Tooltip content={<CustomTooltip />} />
+            <Legend
+              layout="horizontal"
+              align="center"
+              verticalAlign="bottom"
+              formatter={renderColorfulLegendText}
+              wrapperStyle={{
+                position: "absolute",
+                bottom: 0,
+                left: 0,
+                right: 0,
+                fontSize: "0.75rem",
+                display: "flex",
+                flexWrap: "wrap",
+                justifyContent: "center",
+              }}
+            />
+          </PieChart>
+        </ResponsiveContainer>
+      </Box>
+    </Box>
+  );
+};
 
 export default PieChartWithSelect;

@@ -1,16 +1,16 @@
 import React from 'react';
 import { FormControl, InputLabel, Select as MuiSelect, MenuItem } from '@mui/material';
 
+export interface SelectOption {
+  value: string;
+  label: string;
+}
+
 interface SelectProps {
   label: string;
   value: string;
   onChange: (value: string) => void;
-  options: { value: string; label: string }[];
-}
-
-export interface SelectOption {
-  value: string;
-  label: string;
+  options: SelectOption[];
 }
 
 export const Select: React.FC<SelectProps> = ({ label, value, onChange, options }) => (
@@ -27,3 +27,6 @@ export const Select: React.FC<SelectProps> = ({ label, value, onChange, options 
     </MuiSelect>
   </FormControl>
 );
+
+// Make sure to export the Select component as default
+export default Select;

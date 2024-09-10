@@ -14,6 +14,8 @@
     "languageSwitch": "Passer à l'anglais",
     "loading": "Chargement...",
     "allMolecules": "Toutes les molécules",
+    "selectMolecules": "Molécules choisie",
+
     "priceEUR": "Prix (EUR)",
     "priceUSD": "Prix (USD)",
     "allFields": "Tous les domaines",
@@ -22,6 +24,9 @@
     "ongoing": "En cours",
     "pending": "En attente",
     "participants": "Participants",
-    "conditions": "coucou"
+    "conditions": "coucou",
+    "totalFunding": "Financement",
+    "selectResearchField": "Domaine de recherche"
+
   }
 }
