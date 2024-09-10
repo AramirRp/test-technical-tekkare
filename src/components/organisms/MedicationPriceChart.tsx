@@ -55,7 +55,7 @@ const MedicationPriceChart: React.FC<MedicationPriceChartProps> = ({ data }) => 
     return data.molecules.map(molecule => ({ value: molecule.name, label: molecule.name }));
   }, [data]);
 
-  const handleMoleculeChange = (event: React.SyntheticEvent, newValue: string[]) => {
+  const handleMoleculeChange = (_: React.SyntheticEvent, newValue: string[]) => {
     setSelectedMolecules(newValue);
   };
 
@@ -93,9 +93,6 @@ const MedicationPriceChart: React.FC<MedicationPriceChartProps> = ({ data }) => 
         <LineChartWithSelect
           title=""
           data={chartData}
-          selectOptions={[]}
-          selectedValue=""
-          onSelectChange={() => {}}
           xAxisDataKey="date"
           lines={[
             { dataKey: "priceEUR", stroke: "#8884d8", name: t('priceEUR') },

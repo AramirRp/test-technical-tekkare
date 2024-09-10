@@ -1,7 +1,6 @@
 import React from 'react';
 import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import { Box, Typography } from '@mui/material';
-import { Select, SelectOption } from '../atoms/select';
 
 interface PriceHistory {
   date: string;
@@ -18,9 +17,6 @@ interface LineData {
 interface LineChartWithSelectProps {
   title: string;
   data: PriceHistory[];
-  selectOptions: SelectOption[];
-  selectedValue: string;
-  onSelectChange: (value: string) => void;
   xAxisDataKey: keyof PriceHistory;
   lines: LineData[];
 }
@@ -28,9 +24,6 @@ interface LineChartWithSelectProps {
 export const LineChartWithSelect: React.FC<LineChartWithSelectProps> = ({
   title,
   data,
-  selectOptions,
-  selectedValue,
-  onSelectChange,
   xAxisDataKey,
   lines
 }) => {
@@ -56,7 +49,10 @@ export const LineChartWithSelect: React.FC<LineChartWithSelectProps> = ({
           <YAxis />
           <Tooltip 
             labelFormatter={(label) => new Date(label).toLocaleDateString()}
-            formatter={(value, name, props) => [`${value} ${name.includes('EUR') ? '€' : '$'}`, props.dataKey]}
+            formatter={(value, name, props) => [
+              `${value} ${(name as string).toLowerCase().includes('eur') ? '€' : '$'}`,
+              props.dataKey
+            ]}
           />
           <Legend />
           {lines.map((line) => (
