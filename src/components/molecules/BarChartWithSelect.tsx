@@ -15,7 +15,6 @@ interface BarChartWithSelectProps {
   xAxisDataKey: string;
   barDataKey: string;
   barName: string;
-  barColor: string;
   groupBy: string;
 }
 
@@ -27,9 +26,7 @@ export const BarChartWithSelect: React.FC<BarChartWithSelectProps> = ({
   xAxisDataKey,
   barDataKey,
   barName,
-  barColor,
   groupBy
-
 }) => {
   const groupedData = useMemo(() => {
     return data.reduce((acc, item) => {
@@ -110,7 +107,7 @@ export const BarChartWithSelect: React.FC<BarChartWithSelectProps> = ({
               fill={colors[index % colors.length]}
               stackId="a"
             >
-              {groupedData[key].map((entry, entryIndex) => (
+              {groupedData[key].map((_, entryIndex) => (
                 <Cell key={`cell-${entryIndex}`} fill={colors[index % colors.length]} />
               ))}
             </Bar>

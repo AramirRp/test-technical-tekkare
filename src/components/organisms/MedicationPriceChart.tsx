@@ -1,7 +1,9 @@
 import React, { useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Box, Autocomplete, TextField, Chip } from '@mui/material';
 import { LineChartWithSelect } from '../molecules/LineChartWithSelect';
+import { Box, Typography, Paper } from '@mui/material';
+import { SelectOption } from '../atoms/select';
+
 interface PriceHistory {
   date: string;
   priceEUR: number;
@@ -30,10 +32,10 @@ interface MedicationPriceChartProps {
 
 const MedicationPriceChart: React.FC<MedicationPriceChartProps> = ({ data }) => {
   const { t } = useTranslation();
-  const [selectedMolecules, setSelectedMolecules] = useState<string[]>(['all']);
+  const [selectedMolecule, setSelectedMolecule] = useState('all');
 
   const chartData = useMemo(() => {
-    if (selectedMolecules.includes('all')) {
+    if (selectedMolecule === 'all') {
       return data.molecules.flatMap(molecule => 
         molecule.medications[0].priceHistory.map(history => ({
           ...history,
@@ -41,60 +43,44 @@ const MedicationPriceChart: React.FC<MedicationPriceChartProps> = ({ data }) => 
         }))
       );
     } else {
-      return data.molecules
-        .filter(m => selectedMolecules.includes(m.name))
-        .flatMap(molecule => 
-          molecule.medications[0].priceHistory.map(history => ({
-            ...history,
-            molecule: molecule.name
-          }))
-        );
+      const molecule = data.molecules.find(m => m.name === selectedMolecule);
+      return molecule ? molecule.medications[0].priceHistory.map(history => ({
+        ...history,
+        molecule: molecule.name
+      })) : [];
     }
-  }, [data, selectedMolecules]);
+  }, [data, selectedMolecule]);
 
-  const moleculeOptions = useMemo(() => {
+  const moleculeOptions: SelectOption[] = useMemo(() => {
     return [
       { value: 'all', label: t('allMolecules') },
       ...data.molecules.map(molecule => ({ value: molecule.name, label: molecule.name }))
     ];
   }, [data, t]);
 
-  const handleMoleculeChange = (event: React.SyntheticEvent, newValue: string[]) => {
-    setSelectedMolecules(newValue.length === 0 ? ['all'] : newValue);
+  const handleMoleculeChange = (value: string) => {
+    setSelectedMolecule(value);
   };
 
   return (
-    <Box>
-      <Autocomplete
-        multiple
-        options={moleculeOptions.map(option => option.value)}
-        getOptionLabel={(option) => moleculeOptions.find(o => o.value === option)?.label || option}
-        value={selectedMolecules}
-        onChange={handleMoleculeChange}
-        renderInput={(params) => (
-          <TextField {...params} variant="outlined" label={t('selectMolecules')} />
-        )}
-        renderTags={(value: string[], getTagProps) =>
-          value.map((option, index) => (
-            <Chip
-              label={moleculeOptions.find(o => o.value === option)?.label || option}
-              {...getTagProps({ index })}
-              color="primary"
-              variant="outlined"
-            />
-          ))
-        }
-      />
-      <LineChartWithSelect
-        title={t('dashboard.medicationChart')}
-        data={chartData}
-        xAxisDataKey="date"
-        lines={[
-          { dataKey: "priceEUR", stroke: "#8884d8", name: t('priceEUR') },
-          { dataKey: "priceUSD", stroke: "#82ca9d", name: t('priceUSD') }
-        ]}
-      />
-    </Box>
+    <Paper elevation={3} sx={{ p: 3, height: '100%', minHeight: 500 }}>
+      <Typography variant="h6" gutterBottom>
+        {t('dashboard.medicationChart')}
+      </Typography>
+      <Box height="calc(100% - 60px)">
+        <LineChartWithSelect
+          data={chartData}
+          selectOptions={moleculeOptions}
+          selectedValue={selectedMolecule}
+          onSelectChange={handleMoleculeChange}
+          xAxisDataKey="date"
+          lines={[
+            { dataKey: "priceEUR", stroke: "#8884d8", name: t('priceEUR') },
+            { dataKey: "priceUSD", stroke: "#82ca9d", name: t('priceUSD') }
+          ]}
+        />
+      </Box>
+    </Paper>
   );
 };
 

@@ -3,7 +3,24 @@ import { useTranslation } from 'react-i18next';
 import { BarChartWithSelect } from '../molecules/BarChartWithSelect';
 import { Box, Typography, Paper } from '@mui/material';
 
-// ... (keep your existing interfaces)
+interface ClinicalTrial {
+  trialName: string;
+  phase: string;
+  startDate: string;
+  endDate: string;
+  totalParticipants: number;
+  status: string;
+}
+
+interface ResearchProject {
+  projectName: string;
+  researchField: string;
+  clinicalTrials: ClinicalTrial[];
+}
+
+interface ClinicalTrialsChartProps {
+  data: ResearchProject[];
+}
 
 const ClinicalTrialsChart: React.FC<ClinicalTrialsChartProps> = ({ data }) => {
   const { t } = useTranslation();
@@ -28,6 +45,9 @@ const ClinicalTrialsChart: React.FC<ClinicalTrialsChartProps> = ({ data }) => {
     ];
   }, [data, t]);
 
+  const totalTrials = chartData.length;
+  const totalParticipants = chartData.reduce((sum, trial) => sum + trial.totalParticipants, 0);
+
   if (!data.length) return <Typography>{t('noDataAvailable')}</Typography>;
 
   return (
@@ -35,7 +55,15 @@ const ClinicalTrialsChart: React.FC<ClinicalTrialsChartProps> = ({ data }) => {
       <Typography variant="h6" gutterBottom>
         {t('dashboard.clinicalTrialsChart')}
       </Typography>
-      <Box height="calc(100% - 60px)">
+      <Box mb={2}>
+        <Typography variant="subtitle1">
+          {t('totalTrials')}: {totalTrials}
+        </Typography>
+        <Typography variant="subtitle1">
+          {t('totalParticipants')}: {totalParticipants}
+        </Typography>
+      </Box>
+      <Box height="calc(100% - 120px)">
         <BarChartWithSelect
           data={chartData}
           selectOptions={researchFieldOptions}
