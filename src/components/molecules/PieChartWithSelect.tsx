@@ -1,7 +1,7 @@
 import React from 'react';
 import { ResponsiveContainer, PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
 import { Select, SelectOption } from '../atoms/select';
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
 
 interface PieChartData {
   name: string;
@@ -29,6 +29,9 @@ export const PieChartWithSelect: React.FC<PieChartWithSelectProps> = ({
   colors,
   totalFunding
 }) => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
   const CustomTooltip = ({ active, payload }: any) => {
     if (active && payload && payload.length) {
       const data = payload[0].payload;
@@ -43,7 +46,7 @@ export const PieChartWithSelect: React.FC<PieChartWithSelectProps> = ({
   };
 
   const renderColorfulLegendText = (value: string) => {
-    return <span style={{ fontSize: '0.75rem' }}>{value}</span>;
+    return <span style={{ fontSize: isMobile ? '0.7rem' : '0.75rem' }}>{value}</span>;
   };
 
   return (
@@ -59,7 +62,7 @@ export const PieChartWithSelect: React.FC<PieChartWithSelectProps> = ({
       <Typography variant="subtitle1" sx={{ mb: 2 }}>
         Total Funding: ${totalFunding.toLocaleString()}
       </Typography>
-      <Box sx={{ flex: 1, position: 'relative', minHeight: 300 }}>
+      <Box sx={{ flex: 1, position: 'relative', minHeight: isMobile ? 250 : 300 }}>
         <ResponsiveContainer width="100%" height="100%">
           <PieChart>
             <Pie
@@ -67,7 +70,7 @@ export const PieChartWithSelect: React.FC<PieChartWithSelectProps> = ({
               cx="50%"
               cy="50%"
               labelLine={false}
-              outerRadius="80%"
+              outerRadius={isMobile ? "70%" : "80%"}
               fill="#8884d8"
               dataKey={dataKey}
               nameKey={nameKey}
@@ -78,19 +81,13 @@ export const PieChartWithSelect: React.FC<PieChartWithSelectProps> = ({
             </Pie>
             <Tooltip content={<CustomTooltip />} />
             <Legend 
-              layout="horizontal"
-              align="center"
-              verticalAlign="bottom"
+              layout={isMobile ? "horizontal" : "vertical"}
+              align={isMobile ? "center" : "right"}
+              verticalAlign={isMobile ? "bottom" : "middle"}
               formatter={renderColorfulLegendText}
               wrapperStyle={{
-                position: 'absolute',
-                bottom: 0,
-                left: 0,
-                right: 0,
-                fontSize: '0.75rem',
-                display: 'flex',
-                flexWrap: 'wrap',
-                justifyContent: 'center'
+                fontSize: isMobile ? '0.7rem' : '0.75rem',
+                padding: isMobile ? '10px 0' : 0,
               }}
             />
           </PieChart>

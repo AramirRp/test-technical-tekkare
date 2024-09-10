@@ -1,13 +1,12 @@
 import React from 'react';
 import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
-import { Select, SelectOption } from '../atoms/select';
 import { Box, Typography } from '@mui/material';
+import { Select, SelectOption } from '../atoms/select';
 
 interface PriceHistory {
   date: string;
   priceEUR: number;
   priceUSD: number;
-  molecule: string;
 }
 
 interface LineData {
@@ -17,6 +16,7 @@ interface LineData {
 }
 
 interface LineChartWithSelectProps {
+  title: string;
   data: PriceHistory[];
   selectOptions: SelectOption[];
   selectedValue: string;
@@ -26,6 +26,7 @@ interface LineChartWithSelectProps {
 }
 
 export const LineChartWithSelect: React.FC<LineChartWithSelectProps> = ({
+  title,
   data,
   selectOptions,
   selectedValue,
@@ -37,32 +38,11 @@ export const LineChartWithSelect: React.FC<LineChartWithSelectProps> = ({
     return new Date(tickItem).toLocaleDateString();
   };
 
-  const CustomTooltip = ({ active, payload, label }: any) => {
-    if (active && payload && payload.length) {
-      return (
-        <Box sx={{ bgcolor: 'background.paper', p: 2, border: '1px solid #ccc' }}>
-          <Typography variant="body2">{`Date: ${new Date(label).toLocaleDateString()}`}</Typography>
-          {payload.map((entry: any, index: number) => (
-            <Typography key={index} variant="body2" sx={{ color: entry.color }}>
-              {`${entry.name}: ${entry.value} ${entry.name.toLowerCase().includes('eur') ? '€' : '$'}`}
-            </Typography>
-          ))}
-        </Box>
-      );
-    }
-    return null;
-  };
-
   return (
     <Box>
-      <Box mb={2}>
-        <Select
-          label="Select Molecule"
-          value={selectedValue}
-          onChange={onSelectChange}
-          options={selectOptions}
-        />
-      </Box>
+      <Typography variant="h6" gutterBottom>
+        {title}
+      </Typography>
       <ResponsiveContainer width="100%" height={400}>
         <LineChart data={data}>
           <CartesianGrid strokeDasharray="3 3" />
@@ -74,7 +54,10 @@ export const LineChartWithSelect: React.FC<LineChartWithSelectProps> = ({
             height={70}
           />
           <YAxis />
-          <Tooltip content={<CustomTooltip />} />
+          <Tooltip 
+            labelFormatter={(label) => new Date(label).toLocaleDateString()}
+            formatter={(value, name, props) => [`${value} ${name.includes('EUR') ? '€' : '$'}`, props.dataKey]}
+          />
           <Legend />
           {lines.map((line) => (
             <Line 
